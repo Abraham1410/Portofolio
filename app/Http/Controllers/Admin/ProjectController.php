@@ -56,7 +56,7 @@ class ProjectController extends Controller
         $data['tech_stack'] = array_map('trim', explode(',', $request->tech_stack_input ?? ''));
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('projects', 'public');
+            $data['image'] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         }
 
         Project::create($data);
@@ -89,7 +89,7 @@ class ProjectController extends Controller
         $data['tech_stack'] = array_map('trim', explode(',', $request->tech_stack_input ?? ''));
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('projects', 'public');
+            $data['image'] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
         }
 
         $project->update($data);
