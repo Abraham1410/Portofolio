@@ -9,6 +9,10 @@ Route::get('/', [PortfolioController::class, 'index'])->name('home');
 Route::get('/project/{slug}', [PortfolioController::class, 'project'])->name('project.show');
 Route::post('/contact', [PortfolioController::class, 'sendContact'])->name('contact.send');
 
+Route::get('/fix-data', function () {
+    \App\Models\Project::query()->update(['is_active' => 1, 'featured' => 1]);
+    return 'Done! Semua project sekarang aktif.';
+});
 // AUTH ROUTES
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
