@@ -56,7 +56,15 @@ class ProjectController extends Controller
         $data['tech_stack'] = array_map('trim', explode(',', $request->tech_stack_input ?? ''));
 
         if ($request->hasFile('image')) {
-            $data['image'] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $cloudinary = new \Cloudinary\Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+            $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath());
+            $data['image'] = $result['secure_url'];
         }
 
         Project::create($data);
@@ -89,7 +97,15 @@ class ProjectController extends Controller
         $data['tech_stack'] = array_map('trim', explode(',', $request->tech_stack_input ?? ''));
 
         if ($request->hasFile('image')) {
-            $data['image'] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $cloudinary = new \Cloudinary\Cloudinary([
+                'cloud' => [
+                    'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+                    'api_key'    => env('CLOUDINARY_API_KEY'),
+                    'api_secret' => env('CLOUDINARY_API_SECRET'),
+                ],
+            ]);
+            $result = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath());
+            $data['image'] = $result['secure_url'];
         }
 
         $project->update($data);
