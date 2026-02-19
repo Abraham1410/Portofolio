@@ -26,6 +26,11 @@ Route::get('/debug2', function () {
     ]);
 });
 
+Route::get('/debug-images', function () {
+    $projects = \App\Models\Project::whereNotNull('image')->get(['id', 'title', 'image']);
+    return response()->json($projects);
+});
+
 Route::get('/fix-data', function () {
     \App\Models\Project::query()->update(['is_active' => 1, 'featured' => 1]);
     return 'Done! Semua project sekarang aktif.';
