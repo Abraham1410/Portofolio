@@ -35,6 +35,13 @@
             <a href="{{ route('home') }}" target="_blank">
                 <span>🌐</span> Lihat Portfolio
             </a>
+            <div class="sidebar-divider"></div>
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="sidebar-logout">
+                    <span>🚪</span> Logout
+                </button>
+            </form>
         </nav>
     </aside>
 
