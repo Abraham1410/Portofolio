@@ -17,6 +17,15 @@ Route::get('/debug', function () {
     ]);
 });
 
+Route::get('/debug2', function () {
+    $projects = \App\Models\Project::where('is_active', true)->orderBy('order')->get();
+    $profile  = \App\Models\Profile::getProfile();
+    return response()->json([
+        'projects_count' => $projects->count(),
+        'profile'        => $profile,
+    ]);
+});
+
 Route::get('/fix-data', function () {
     \App\Models\Project::query()->update(['is_active' => 1, 'featured' => 1]);
     return 'Done! Semua project sekarang aktif.';
