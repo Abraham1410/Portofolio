@@ -192,7 +192,7 @@
             <article class="project-card" data-reveal data-category="{{ Str::slug($project->category) }}">
                 <div class="project-image">
                     @if($project->image)
-                        <img src="{{ Str::startsWith($project->image, 'http') ? $project->image : asset('storage/' . $project->image) }}" alt="{{ $project->title }}" loading="lazy">
+                        <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" loading="lazy">
                     @else
                         <div class="project-placeholder">
                             <div class="placeholder-grid">
