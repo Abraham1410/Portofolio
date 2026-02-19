@@ -49,7 +49,7 @@
     @if($project->image)
     <div class="detail-image-wrap">
         <div class="container">
-            <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="detail-image">
+            <img src="{{ Str::startsWith($project->image, 'http') ? $project->image : asset('storage/' . $project->image) }}" alt="{{ $project->title }}" class="detail-image">
         </div>
     </div>
     @endif
